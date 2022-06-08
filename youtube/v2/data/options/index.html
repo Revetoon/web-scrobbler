@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>Last.fm Scrobbler :: Options</title>
+    <title>Web Scrobbler :: Options</title>
   </head>
   <style type="text/css">
     input[type=text] {
@@ -18,6 +18,20 @@
   </style>
   <body>
     <table width="100%">
+      <tr>
+        <td>&nbsp;</td>
+        <td>
+          <span>Custom Last.fm API Key <a href="https://www.base64decode.org/">in base64 format</a> (Optional)</span>
+          <input style="margin-top: 5px;" type="text" id="userApiKey">
+        </td>
+      </tr>
+      <tr>
+        <td>&nbsp;</td>
+        <td>
+          <span>Custom Last.fm API Secret <a href="https://www.base64decode.org/">in base64 format</a> (Optional)</span>
+          <input style="margin-top: 5px;" type="text" id="userApiSecret">
+        </td>
+      </tr>
       <tr>
         <td><input type="checkbox" id="manualCheck"></td>
         <td><label for="manualCheck">Check manually entered song details with last.fm database before scrobbling them</label></td>
@@ -52,7 +66,6 @@
 
 
     <p>
-      <input type="button" id="support" value="Support Development">
       <input type="button" id="reset" value="Reset">
       <input type="button" id="save" value="Save">
       <span id="toast"></span>

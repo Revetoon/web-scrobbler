@@ -1,10 +1,8 @@
 {
   "manifest_version": 2,
-  "name": "Last.fm Scrobbler for YouTube™",
-  "version": "0.2.3",
-
-  "description": "Scrobbling YouTube music videos to Last.fm with support for chapters/tracks",
-
+  "name": "Web Scrobbler",
+  "version": "0.3.0",
+  "description": "Scrobbling musics to Last.fm",
   "permissions": [
     "storage",
     "https://www.last.fm/api/*",
@@ -45,7 +43,7 @@
   "web_accessible_resources": [
     "data/love/unprotected.js"
   ],
-  "homepage_url": "https://add0n.com/lastfm-tool.html?from=youtube",
+  "homepage_url": "https://github.com/Revetoon/web-scrobbler",
   "options_ui": {
     "page": "data/options/index.html",
     "chrome_style": true
