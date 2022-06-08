@@ -28,7 +28,8 @@
     "js": [
       "data/love/protected.js",
       "data/scrobbler/protected.js",
-      "data/player/protected.js"
+      "data/player/protected.js",
+      "common.js"
     ]
   }],
   "background": {
@@ -36,7 +37,8 @@
     "scripts": [
       "md5.min.js",
       "lastfm.js",
-      "background.js"
+      "background.js",
+      "common.js"
     ]
   },
   "page_action": {},

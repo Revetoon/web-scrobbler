@@ -1,3 +1,4 @@
+/* globals defaultConfig */
 'use strict';
 
 const playerStateEnum = {
@@ -40,14 +41,18 @@ const timer = {
 // Autechre - SIGN (Full Album)
 // Mastodon - Topic
 
-const clearString = (originalTitle, type) => {
+const clearString = (originalTitle, type, cleanupList) => {
+  var cleanupRegexStr = cleanupList.join('|');
+  var cleanupRegexParenthesis = new RegExp("(?<=\\()[^)]*(" + cleanupRegexStr + ")[^)]*(?=\\))", "ig");
+  var cleanupRegexBracket = new RegExp("(?<=\\[)[^\\]]*(" + cleanupRegexStr + ")[^\]]*(?=\\])", "ig");
+  
   originalTitle = originalTitle
     .replace(' - Topic', '')
     .replace(/^- /, '')
     .replace('VEVO', '')
-    .replace(/(?<=\()[^)]*(video|videoclipe|clipe|audio|official|oficial|hd|version|music|4k|lyric|promo|album)[^)]*(?=\))/ig, '')
+    .replace(cleanupRegexParenthesis, '')
     .replace(/\(\)/g, '')
-    .replace(/(?<=\[)[^\]]*(video|videoclipe|clipe|audio|official|oficial|hd|version|music|4k|lyric|promo|album)[^\]]*(?=\])/ig, '')
+    .replace(cleanupRegexBracket, '')
     .replace(/\[\]/g, '');
 
   // e.g. 1. Dance, Baby!
@@ -283,9 +288,10 @@ window.addEventListener('message', ({data}) => {
     console.info('Channel:', channel, 'Category:', category);
 
     chrome.storage.local.get({
-      categories: ['Música', 'Music', 'Entertainment'],
-      blacklistAuthors: [],
-      checkCategory: true
+      categories: defaultConfig.categories,
+      blacklistAuthors: defaultConfig.blacklistAuthors,
+      cleanupList: defaultConfig.cleanupList,
+      checkCategory: defaultConfig.checkCategory
     }, prefs => {
       if (prefs.categories.indexOf(category) === -1 && prefs.checkCategory) {
         msg.displayFor(`Scrobbling skipped ("${category}" category is not listed)`);
@@ -308,7 +314,7 @@ window.addEventListener('message', ({data}) => {
             title = chapter.textContent;
             chapterCache.push(chapter.textContent);
           }
-
+          
           title = title.replace(/^\[[^\]]+\]\s*-*\s*/i, '');
           const separators = [
             ' -- ', '--', ' - ', ' – ', ' — ',
@@ -321,8 +327,8 @@ window.addEventListener('message', ({data}) => {
             artist = author;
             track = title;
           }
-          artist = clearString(artist, 'artist');
-          track = clearString(track, 'track');
+          artist = clearString(artist, 'artist', prefs.cleanupList);
+          track = clearString(track, 'track', prefs.cleanupList);
 
           // console.log('artist:', artist, 'track:', track, 2);
           return {
