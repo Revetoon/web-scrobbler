@@ -1,5 +1,15 @@
 'use strict';
 
+const playerStateEnum = {
+  UNSTARTED : -1,
+  ENDED: 0,
+  PLAYING: 1,
+  PAUSED: 2,
+  BUFFERING: 3,
+  CUED: 5
+};
+Object.freeze(playerStateEnum);
+
 let artist;
 let track;
 let category = 'Music';
@@ -374,8 +384,9 @@ window.addEventListener('message', ({data}) => {
     });
   }
   else if (data && data.method === 'lastfm-player-state') {
-    window.clearInterval(timer.id);
-    if (data.state === 1 && active) {
+    if (data.state === playerStateEnum.PAUSED) {
+      window.clearInterval(timer.id);
+    } else if ( data.state === playerStateEnum.PLAYING && active) {
       clearInterval(timer.id);
       timer.id = window.setInterval(timer.update, 1000);
     }
