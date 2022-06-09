@@ -5,7 +5,7 @@ let defaultConfig = {
     'userApiSecret': '',
     'categories': ['Música', 'Music', 'Musique', 'Entertainment'],
     'blacklistAuthors': [],
-    'cleanupList': ['video', 'videoclipe', 'clipe', 'audio', 'official', 'oficial', 'hd', 'version', 'music', '4k', 'lyric', 'promo', 'album'],
+    'cleanupList': ['video', 'videoclipe', 'clipe', 'audio', 'official', 'oficial', 'hd', 'version', 'music', '4k', 'lyric', 'promo', 'album', 'clip', 'officiel'],
     'checkCategory': true,
     'manualCheck': false,
     'filter': true,
