@@ -23,6 +23,9 @@ lastfm.init = () => new Promise((resolve, reject) => {
 });
 
 lastfm.fetch = obj => {
+    // Remove all null object attributes
+    Object.keys(obj).forEach((k) => ( obj[k] == null || obj[k] == "") && delete obj[k]);
+
     obj['api_key'] = lastfm.key;
 
     if (obj.method !== 'track.getInfo') {
